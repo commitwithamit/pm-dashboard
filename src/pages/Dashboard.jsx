@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import 'flowbite';
 import ProductLayout from "../components/ProductLayout";
 import { useProducts } from "../hooks/useProducts";
 import Header from "../components/Header";
