@@ -36,7 +36,7 @@ export default function Header({ search, setSearch, filterCategory, setShowModal
                             id="simple-search"
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 "
                             placeholder="Search products..."
                             required=""
                         />
@@ -52,7 +52,7 @@ export default function Header({ search, setSearch, filterCategory, setShowModal
                         className="text-blue-700 border border-blue-700 rounded-lg focus:outline-none font-medium text-sm px-5 py-2.5 text-center inline-flex justify-between items-center   "
                         type="button"
                     >
-                        {dropDown !== ""? dropDown : "All Categories"}{" "}
+                        {dropDown !== "" ? dropDown : "All Categories"}{" "}
                         <svg
                             className="w-2.5 h-2.5 ms-3"
                             aria-hidden="true"
