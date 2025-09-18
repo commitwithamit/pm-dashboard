@@ -45,6 +45,19 @@ export default function ProductForm({ initialData, onSubmit, setShowModal }) {
         }
     }
 
+    function handleDrop(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const files = e.dataTransfer.files;
+        if(files && files[0]){
+            const filesURL = URL.createObjectURL(files[0]);
+            setFormData((prev)=>({
+                ...prev,
+                image: filesURL,
+            }));
+        }
+    }
+
     function handleForm(e) {
         e.preventDefault();
         onSubmit(formData);
@@ -79,6 +92,8 @@ export default function ProductForm({ initialData, onSubmit, setShowModal }) {
                             // drag & drop file 
                             <label
                                 htmlFor="dropzone-file"
+                                onDrop={handleDrop}
+                                onDragOver={(e) => e.preventDefault()} 
                                 className="flex flex-col items-center justify-center w-full h-35 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                                 onDrop={handleDrop}
                                 onDragOver={(e) => e.preventDefault()}
