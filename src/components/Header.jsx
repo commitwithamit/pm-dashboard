@@ -9,7 +9,7 @@ export default function Header({ search, setSearch, filterCategory, setShowModal
     return (
         <div className="pt-8 site-width">
             <div className="flex items-center justify-end gap-[15px] flex-col md:flex-row md:gap-10 border-b border-blue-200 py-5 shadow-[0px_18px_34px_-27px_#000] bg-white px-5">
-                <div className="flex items-center w-[28rem] max-w-sm">
+                <div className="flex items-center lg:w-[28rem] max-w-sm">
                     <label htmlFor="simple-search" className="sr-only">
                         Search
                     </label>
