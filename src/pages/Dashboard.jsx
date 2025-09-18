@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import 'flowbite';
 import ProductLayout from "../components/ProductLayout";
 import { useProducts } from "../hooks/useProducts";
@@ -14,9 +14,12 @@ export default function Dashboard() {
     const [showModal, setShowModal] = useState({ isOpen: false, type: "" });
     const [editData, setEditData] = useState("");
     const [deleteId, setDeleteId] = useState("");
-
-
     const filterByTitle = products.filter((p) => p.title.toLowerCase().includes(search.toLowerCase()));
+    useEffect(() => {
+        if (!showModal.isOpen) {
+            setEditData("");
+        }
+    }, [showModal.isOpen])
     return (
         <main>
             {/* search bar & add product button */}

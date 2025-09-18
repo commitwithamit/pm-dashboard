@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { IoIosAddCircleOutline } from "react-icons/io";
 
 export default function Header({ search, setSearch, filterCategory, setShowModal }) {
     useEffect(() => {
         initFlowbite();
     }, []);
+    const [dropDown, setDropDown] = useState("");
     return (
         <div className="pt-8 site-width">
             <div className="flex items-center justify-end gap-[15px] flex-col md:flex-row md:gap-10 border-b border-blue-200 py-5 shadow-[0px_18px_34px_-27px_#000] bg-white px-5">
@@ -48,10 +49,10 @@ export default function Header({ search, setSearch, filterCategory, setShowModal
                         data-dropdown-toggle="dropdownHover"
                         data-dropdown-delay="300"
                         data-dropdown-trigger="hover"
-                        className="text-blue-700 border border-blue700 rounded-lg focus:outline-none font-medium text-sm px-5 py-2.5 text-center inline-flex justify-between items-center   "
+                        className="text-blue-700 border border-blue-700 rounded-lg focus:outline-none font-medium text-sm px-5 py-2.5 text-center inline-flex justify-between items-center   "
                         type="button"
                     >
-                        All Categories{" "}
+                        {dropDown !== ""? dropDown : "All Categories"}{" "}
                         <svg
                             className="w-2.5 h-2.5 ms-3"
                             aria-hidden="true"
@@ -78,31 +79,46 @@ export default function Header({ search, setSearch, filterCategory, setShowModal
                             aria-labelledby="dropdownHoverButton"
                         >
                             <li
-                                onClick={() => filterCategory("")}
+                                onClick={() => {
+                                    filterCategory("")
+                                    setDropDown("")
+                                }}
                                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
                             >
                                 All Categories
                             </li>
                             <li
-                                onClick={() => filterCategory("Men's Clothing")}
+                                onClick={() => {
+                                    filterCategory("Men's Clothing");
+                                    setDropDown("Men's Clothing");
+                                }}
                                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
                             >
                                 Men's Clothing
                             </li>
                             <li
-                                onClick={() => filterCategory("Women's Clothing")}
+                                onClick={() => {
+                                    filterCategory("Women's Clothing");
+                                    setDropDown("Women's Clothing");
+                                }}
                                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
                             >
                                 Women's Clothing
                             </li>
                             <li
-                                onClick={() => filterCategory("Jewelery")}
+                                onClick={() => {
+                                    filterCategory("Jewelery");
+                                    setDropDown("Jewelery");
+                                }}
                                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
                             >
                                 Jewelery
                             </li>
                             <li
-                                onClick={() => filterCategory("Electronics")}
+                                onClick={() => {
+                                    filterCategory("Electronics");
+                                    setDropDown("Electronics");
+                                }}
                                 className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white cursor-pointer"
                             >
                                 Electronics

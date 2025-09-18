@@ -1,7 +1,8 @@
 import { LuImageUp } from "react-icons/lu";
 import { useEffect, useState } from "react";
 
-export default function ProductForm({ initialData, onSubmit, setShowModal }) {
+export default function ProductForm({ initialData, onSubmit,setShowModal }) {
+   
     const [formData, setFormData] = useState({
         image: null,
         title: "",
@@ -11,23 +12,11 @@ export default function ProductForm({ initialData, onSubmit, setShowModal }) {
         rating: { rate: "", count: "" },
     });
 
-    function handleDrop(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        const files = e.dataTransfer.files;
-        if(files && files[0]){
-            const filesURL = URL.createObjectURL(files[0]);
-            setFormData((prev)=>({
-                ...prev,
-                image:filesURL,
-            }));
-        }
-    }
-
     useEffect(() => {
         if (initialData) setFormData(initialData);
     }, [initialData]);
 
+    // setting data in formData state from fileds like title, desctiption, image etc.
     function handleChange(e) {
         const { name, files, value, type } = e.target;
 
@@ -43,21 +32,24 @@ export default function ProductForm({ initialData, onSubmit, setShowModal }) {
                 [name]: value
             }));
         }
+
     }
 
+    // drag & drop image functionality
     function handleDrop(e) {
         e.preventDefault();
         e.stopPropagation();
         const files = e.dataTransfer.files;
-        if(files && files[0]){
+        if (files && files[0]) {
             const filesURL = URL.createObjectURL(files[0]);
-            setFormData((prev)=>({
+            setFormData((prev) => ({
                 ...prev,
                 image: filesURL,
             }));
         }
     }
 
+    // form submission 
     function handleForm(e) {
         e.preventDefault();
         onSubmit(formData);
@@ -79,6 +71,7 @@ export default function ProductForm({ initialData, onSubmit, setShowModal }) {
                 <div className={`flex items-center justify-center relative mb-5 ${formData.image ? 'w-[max-content] m-auto' : 'w-full'}`}>
                     {
                         formData.image ?
+                            // change image icon
                             <label
                                 htmlFor="upload-img"
                             >
@@ -89,14 +82,12 @@ export default function ProductForm({ initialData, onSubmit, setShowModal }) {
                                 <input id="upload-img" name="image" type="file" className="hidden" onChange={handleChange} />
                             </label> :
 
-                            // drag & drop file 
+                            // click to add or drag & drop image (only visible when adding a new product)
                             <label
                                 htmlFor="dropzone-file"
                                 onDrop={handleDrop}
-                                onDragOver={(e) => e.preventDefault()} 
-                                className="flex flex-col items-center justify-center w-full h-35 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-                                onDrop={handleDrop}
                                 onDragOver={(e) => e.preventDefault()}
+                                className="flex flex-col items-center justify-center w-full h-35 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                             >
                                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                     <svg
@@ -126,7 +117,7 @@ export default function ProductForm({ initialData, onSubmit, setShowModal }) {
                     }
                 </div>
 
-                {/* titel */}
+                {/* title */}
                 <div className="relative z-0 w-full mb-5 group">
                     <input
                         type="text"
@@ -178,13 +169,13 @@ export default function ProductForm({ initialData, onSubmit, setShowModal }) {
                             value={formData.category}
                             name="category"
                             onChange={handleChange}
-                            className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+                            className="block py-2.5 px-0 w-full text-sm bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer text-gray-500"
                         >
                             <option >Choose a category</option>
-                            <option value="men's clothing">men's clothing</option>
-                            <option value="women's clothing">women's clothing</option>
-                            <option value="jewelery">jewelery</option>
-                            <option value="electronics">electronics</option>
+                            <option className="text-gray-500" value="men's clothing">Men's clothing</option>
+                            <option className="text-gray-500" value="women's clothing">Women's clothing</option>
+                            <option className="text-gray-500" value="jewelery">Jewelery</option>
+                            <option className="text-gray-500" value="electronics">Electronics</option>
                         </select>
                     </>
 
