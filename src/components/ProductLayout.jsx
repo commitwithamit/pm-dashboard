@@ -5,8 +5,6 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 import { useState } from "react";
 
 export default function ProductLayout({ products, onEdit, onDelete, setShowModal }) {
-   
-    let [productId, setProductId] = useState(null);
     return (
         <section className="site-width py-[10rem] flex justify-center flex-wrap  gap-x-[3rem] gap-y-[10rem]">
             {

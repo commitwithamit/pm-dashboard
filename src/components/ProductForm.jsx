@@ -11,14 +11,26 @@ export default function ProductForm({ initialData, onSubmit, setShowModal }) {
         rating: { rate: "", count: "" },
     });
 
+    function handleDrop(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const files = e.dataTransfer.files;
+        if(files && files[0]){
+            const filesURL = URL.createObjectURL(files[0]);
+            setFormData((prev)=>({
+                ...prev,
+                image:filesURL,
+            }));
+        }
+    }
+
     useEffect(() => {
         if (initialData) setFormData(initialData);
     }, [initialData]);
 
     function handleChange(e) {
         const { name, files, value, type } = e.target;
-        console.log(name, files, value);
-        
+
         if (type === "file" && files && files[0]) {
             const fileURL = URL.createObjectURL(files[0]);
             setFormData((prev) => ({
@@ -64,9 +76,12 @@ export default function ProductForm({ initialData, onSubmit, setShowModal }) {
                                 <input id="upload-img" name="image" type="file" className="hidden" onChange={handleChange} />
                             </label> :
 
+                            // drag & drop file 
                             <label
                                 htmlFor="dropzone-file"
                                 className="flex flex-col items-center justify-center w-full h-35 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+                                onDrop={handleDrop}
+                                onDragOver={(e) => e.preventDefault()}
                             >
                                 <div className="flex flex-col items-center justify-center pt-5 pb-6">
                                     <svg
